@@ -1,0 +1,18 @@
+.custom-nav-bar {
+    padding: 10px;
+}
+
+.custom-nav-bar-brand {
+    font-size: 24px;
+    color: #007bff;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.custom-nav-bar-brand:hover {
+    color: #0056b3;
+}
+
+.custom-nav-bar-line {
+    margin-top: 5px;
+}
