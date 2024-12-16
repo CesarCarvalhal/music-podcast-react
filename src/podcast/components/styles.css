@@ -69,3 +69,14 @@ li {
     align-items: center;
 
 }
+
+.podcast-card-link {
+    text-decoration: none;
+    transition: transform 0.3s ease;
+    color: black;
+}
+
+.loading {
+    text-align: center;
+    color: #e5e5e5;
+}

@@ -1,4 +1,5 @@
 import { usePodcastFetch } from '../../hook/usePodcastFetch ';
+import LoadingMessage from './LoadingMessage';
 import { PodcastCard } from './PodcastCard';
 
 const PODCASTS_URL = 'https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json';
@@ -12,7 +13,7 @@ export const PodcastList = () => {
         <div>
             {hasError && <div className="error-message">Error: {error.message}</div>}
 
-            {isLoading && <div className='loading-message'>Loading podcasts...</div>}
+            {isLoading && <LoadingMessage />}
 
             {Array.isArray(podcasts) && podcasts.length > 0 ? (
                 <ul className="podcast-list">

@@ -15,4 +15,6 @@
 
 .custom-nav-bar-line {
     margin-top: 5px;
+    border: none;
+    border-top: 1px solid grey;
 }
