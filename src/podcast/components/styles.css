@@ -1,3 +1,20 @@
+/* Estilos Generales (Global Styles) */
+ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  justify-content: center;
+}
+
+li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Contenedor Principal de la Página de Detalles */
 .details-page-container {
   display: flex;
   justify-content: space-between;
@@ -16,17 +33,8 @@
   flex: 2 1 60%;
 }
 
-@media (max-width: 768px) {
-  .details-page-container {
-    flex-direction: column;
-  }
 
-  .left-column,
-  .right-column {
-    max-width: 100%;
-  }
-}
-
+/* Estilos de las Tarjetas de Detalles de Podcast */
 .podcast-details-card {
   display: flex;
   flex-direction: column;
@@ -64,6 +72,8 @@
   padding-left: 0;
 }
 
+
+/* Estilos de los Episodios del podcast */
 .podcast-episodes {
   display: flex;
   flex-direction: column;
@@ -104,6 +114,8 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+
+/* Estilos de la Tabla de episodios */
 .episodes-table {
   width: 100%;
   height: auto;
@@ -146,22 +158,8 @@ audio {
   margin-top: 20px;
 }
 
-ul {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 0;
-  justify-content: center;
-  margin: 0 20px;
-}
 
-li {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
+/* Estilos de las Tarjetas de podcast */
 .podcast-card {
   display: flex;
   flex-direction: column;
@@ -172,9 +170,10 @@ li {
   background-color: #fff;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
-  width: 300px;
+  width: 280px;
   height: 200px;
   justify-content: space-between;
+  margin-right: 20px;
 }
 
 .podcast-card:hover {
@@ -211,6 +210,8 @@ li {
   text-align: center;
 }
 
+
+/* Estilos del Loading */
 .loading-message {
   display: flex;
   justify-content: center;
@@ -226,4 +227,61 @@ li {
 .loading {
   text-align: center;
   color: #e5e5e5;
+}
+
+
+/* Estilos de la Barra de Búsqueda */
+.search-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 20px;
+  margin-right: 68px;
+}
+
+.podcast-count {
+  margin-right: 20px;
+  color: #fff;
+  background-color: #0772e4;
+  border-radius: 26%;
+  width: 40px;
+  height: auto;
+  font-weight: bold;
+  text-align: center;
+}
+
+.search-input {
+  padding: 10px;
+  width: 25%;
+  font-size: 16px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .details-page-container {
+    flex-direction: column;
+  }
+
+  .left-column,
+  .right-column {
+    max-width: 100%;
+  }
+
+  .search-container {
+    justify-content: center;
+  }
+
+  .search-input {
+    width: 60%;
+  }
+  
 }
