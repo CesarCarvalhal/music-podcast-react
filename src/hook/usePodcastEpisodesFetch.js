@@ -47,28 +47,42 @@ export const usePodcastEpisodesFetch = (podcastId) => {
     setLoadingState();
 
     try {
-      const response = await fetch(`https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode`);
+      const allOriginsUrl = `https://api.allorigins.win/get?url=${encodeURIComponent('https://itunes.apple.com/lookup?id=' + podcastId + '&media=podcast&entity=podcastEpisode')}`;
+      
+      const response = await fetch(allOriginsUrl);
       const data = await response.json();
 
-      if (data.results) {
-        const episodes = data.results;
+      if (data.contents) {
+        const parsedData = JSON.parse(data.contents);
 
-        localStorage.setItem(`${CACHE_KEY_EPISODES}_${podcastId}`, JSON.stringify(episodes));
-        localStorage.setItem(`${CACHE_TIMESTAMP_KEY_EPISODES}_${podcastId}`, currentTimestamp.toString());
+        if (parsedData.results) {
+          const episodes = parsedData.results;
 
-        setState({
-          episodes,
-          isLoading: false,
-          hasError: false,
-          error: null,
-          episodeCount: episodes.length,
-        });
+          localStorage.setItem(`${CACHE_KEY_EPISODES}_${podcastId}`, JSON.stringify(episodes));
+          localStorage.setItem(`${CACHE_TIMESTAMP_KEY_EPISODES}_${podcastId}`, currentTimestamp.toString());
+
+          setState({
+            episodes,
+            isLoading: false,
+            hasError: false,
+            error: null,
+            episodeCount: episodes.length,
+          });
+        } else {
+          setState({
+            episodes: [],
+            isLoading: false,
+            hasError: true,
+            error: { message: 'No se encontraron episodios' },
+            episodeCount: 0,
+          });
+        }
       } else {
         setState({
           episodes: [],
           isLoading: false,
           hasError: true,
-          error: { message: 'No se encontraron episodios' },
+          error: { message: 'No se pudo obtener los datos de AllOrigins' },
           episodeCount: 0,
         });
       }
