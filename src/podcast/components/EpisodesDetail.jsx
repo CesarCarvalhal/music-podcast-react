@@ -1,11 +1,12 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { usePodcastEpisodesFetch } from '../../hook/usePodcastEpisodesFetch';
+import { usePodcastFetch } from '../../hook/usePodcastFetch ';
+
 
 export const EpisodesDetail = () => {
   const { podcastId, episodeId } = useParams();
 
-  const { episodes, isLoading, hasError, error } = usePodcastEpisodesFetch(podcastId);
+  const { episodes, isLoading, hasError, error } = usePodcastFetch(null, podcastId);
 
   const episodeDetails = episodes.find((episode) => episode.trackId === parseInt(episodeId));
 

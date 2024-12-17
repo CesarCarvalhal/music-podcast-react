@@ -1,14 +1,14 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { usePodcastEpisodesFetch } from '../../hook/usePodcastEpisodesFetch';
 import LoadingMessage from './LoadingMessage';
 import { Link } from 'react-router-dom';
 import './styles.css';
+import { usePodcastFetch } from '../../hook/usePodcastFetch ';
 
 export const PodcastEpisodes = () => {
     const { podcastId } = useParams();
     
-    const { episodes, isLoading, hasError, error, episodeCount } = usePodcastEpisodesFetch(podcastId);
+    const { episodes, isLoading, hasError, error, episodeCount } = usePodcastFetch(null, podcastId);
 
     if (isLoading) {
         return <LoadingMessage />;
