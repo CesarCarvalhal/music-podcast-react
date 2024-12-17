@@ -72,6 +72,23 @@ li {
   padding-left: 0;
 }
 
+.podcast-image-details {
+  margin: 0 auto;
+}
+
+.podcast-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.podcast-link:hover .podcast-image {
+  opacity: 0.9;
+}
+
+.podcast-link:hover {
+  opacity: 0.9;
+}
+
 
 /* Estilos de los Episodios del podcast */
 .podcast-episodes {
@@ -209,7 +226,6 @@ audio {
   color: #555;
   text-align: center;
 }
-
 
 /* Estilos del Loading */
 .loading-message {

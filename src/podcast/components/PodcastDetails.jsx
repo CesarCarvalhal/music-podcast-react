@@ -1,6 +1,7 @@
-import { useParams } from 'react-router-dom';
-import { usePodcastFetch } from '../../hook/usePodcastFetch ';
+import React from 'react';
+import { Link, useParams } from 'react-router-dom';
 import LoadingMessage from './LoadingMessage';
+import { usePodcastFetch } from '../../hook/usePodcastFetch ';
 import './styles.css';
 
 export const PodcastDetails = () => {
@@ -25,10 +26,24 @@ export const PodcastDetails = () => {
   return (
     <div className="podcast-details-container">
       <div className="podcast-details-card">
-        <img src={podcastData['im:image'][2].label} alt={podcastData['im:name'].label} />
+        <div className="podcast-image-details">
+          <Link to={`/podcast/${podcastData.id.attributes['im:id']}`} className="podcast-link">
+            <img
+              src={podcastData['im:image'][2].label}
+              alt={podcastData['im:name'].label}
+            />
+          </Link>
+        </div>
         <hr className="podcast-details-hr" />
-        <p><strong>{podcastData['im:name'].label}</strong> by {podcastData['im:artist'].label}</p>
+
+        <Link to={`/podcast/${podcastData.id.attributes['im:id']}`} className="podcast-link">
+          <p>
+            <strong>{podcastData['im:name'].label}</strong> by {podcastData['im:artist'].label}
+          </p>
+        </Link>
+
         <hr className="podcast-details-hr" />
+
         <p><strong>Description:</strong></p>
         <p>{podcastData['summary'].label}</p>
       </div>
