@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect } from 'react';
 
-const localCache = {};
+const CACHE_KEY = 'podcasts_data';
+const CACHE_TIMESTAMP_KEY = 'podcasts_data_timestamp';
 
 export const usePodcastFetch = (url) => {
     const [state, setState] = useState({
@@ -26,9 +27,13 @@ export const usePodcastFetch = (url) => {
     };
 
     const fetchPodcasts = async () => {
-        if (localCache[url]) {
+        const cachedData = localStorage.getItem(CACHE_KEY);
+        const cachedTimestamp = localStorage.getItem(CACHE_TIMESTAMP_KEY);
+        const currentTimestamp = Date.now();
+
+        if (cachedData && cachedTimestamp && currentTimestamp - cachedTimestamp < 24 * 60 * 60 * 1000) {
             setState({
-                data: localCache[url],
+                data: JSON.parse(cachedData),
                 isLoading: false,
                 hasError: false,
                 error: null,
@@ -55,21 +60,22 @@ export const usePodcastFetch = (url) => {
 
             const data = await response.json();
 
+            localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+            localStorage.setItem(CACHE_TIMESTAMP_KEY, currentTimestamp.toString());
+
             setState({
                 data,
                 isLoading: false,
                 hasError: false,
                 error: null,
             });
-
-            localCache[url] = data;
         } catch (error) {
             setState({
                 data: null,
                 isLoading: false,
                 hasError: true,
                 error: {
-                    message: "Error al cargar los podcasts",
+                    message: 'Error al cargar los podcasts',
                 },
             });
         }

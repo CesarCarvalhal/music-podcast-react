@@ -1,33 +1,24 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useParams } from 'react-router-dom';
-
+import { usePodcastEpisodesFetch } from '../../hook/usePodcastEpisodesFetch';
 
 export const EpisodesDetail = () => {
   const { podcastId, episodeId } = useParams();
-  const [episodeDetails, setEpisodeDetails] = useState(null);
 
-  useEffect(() => {
-    const fetchEpisodeDetails = async () => {
-      try {
-        const response = await fetch(`https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode`);
-        const data = await response.json();
+  const { episodes, isLoading, hasError, error } = usePodcastEpisodesFetch(podcastId);
 
-        const episode = data.results.find((ep) => ep.trackId === parseInt(episodeId));
-        if (episode) {
-          setEpisodeDetails(episode);
-        } else {
-          setEpisodeDetails(null);
-        }
-      } catch (error) {
-        console.error('Error fetching episode details:', error);
-      }
-    };
+  const episodeDetails = episodes.find((episode) => episode.trackId === parseInt(episodeId));
 
-    fetchEpisodeDetails();
-  }, [podcastId, episodeId]);
+  if (isLoading) {
+    return <div>Cargando detalles del episodio...</div>;
+  }
+
+  if (hasError) {
+    return <div>{error.message}</div>;
+  }
 
   if (!episodeDetails) {
-    return <div>Cargando detalles del episodio...</div>;
+    return <div>Detalles del episodio no encontrados</div>;
   }
 
   return (
