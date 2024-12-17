@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import LoadingMessage from '../components/LoadingMessage';
+import { useParams } from 'react-router-dom';
+import LoadingMessage from './LoadingMessage';
+import { Link } from 'react-router-dom';
 import './styles.css';
 
-export const PodcastEpisodes = ({ podcastId }) => {
+export const PodcastEpisodes = () => {
+    const { podcastId } = useParams();
     const [episodes, setEpisodes] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
-    const [episodeCount, setEpisodeCount] = useState(0); 
+    const [episodeCount, setEpisodeCount] = useState(0);
 
     useEffect(() => {
         const fetchPodcastEpisodes = async () => {
@@ -14,7 +17,7 @@ export const PodcastEpisodes = ({ podcastId }) => {
                 const response = await fetch(`https://itunes.apple.com/lookup?id=${podcastId}&media=podcast&entity=podcastEpisode`);
                 const data = await response.json();
 
-                if (data.results ) {
+                if (data.results) {
                     setEpisodes(data.results); 
                     setEpisodeCount(data.resultCount); 
                 } else {
@@ -32,7 +35,7 @@ export const PodcastEpisodes = ({ podcastId }) => {
     }, [podcastId]);
 
     if (loading) {
-        return <LoadingMessage />; 
+        return <LoadingMessage />;
     }
 
     if (error) {
@@ -59,7 +62,12 @@ export const PodcastEpisodes = ({ podcastId }) => {
                             {episodes.map((episode) => (
                                 <tr key={episode.trackId}>
                                     <td>
+                                        <Link
+                                            className="custom-nav-bar-brand"
+                                            to={`/podcast/${podcastId}/episode/${episode.trackId}`}
+                                        >
                                             {episode.trackName}
+                                        </Link>
                                     </td>
                                     <td>{new Date(episode.releaseDate).toLocaleDateString()}</td>
                                 </tr>

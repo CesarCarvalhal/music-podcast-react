@@ -1,7 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import LoadingMessage from '../components/LoadingMessage';
-import { PodcastEpisodes } from './PodcastEpisodes';
+import LoadingMessage from './LoadingMessage';
 import './styles.css';
 
 export const PodcastDetails = () => {
@@ -67,7 +66,6 @@ export const PodcastDetails = () => {
         <p><strong>Description:</strong></p>
         <p>{podcast.description}</p>
       </div>
-      <PodcastEpisodes podcastId={podcastId} />
     </div>
   );
 };

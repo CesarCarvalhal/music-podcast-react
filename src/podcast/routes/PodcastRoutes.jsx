@@ -1,6 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
 import { Navbar } from '../../ui/components/Navbar';
-import { PodcastPage, PodcastDetails } from '../pages';
+import { DetailsPagePodcast } from '../pages/DetailsPagePodcast';
+import { DetailsPageEpisodes } from '../pages/DetailsPageEpisodes';
+import { PodcastPage } from '../pages/PodcastPage';
 
 export const PodcastRoutes = () => {
   return (
@@ -9,7 +11,8 @@ export const PodcastRoutes = () => {
       <div className="container">
         <Routes>
           <Route path="/" element={<PodcastPage />} />
-          <Route path="/podcast/:podcastId" element={<PodcastDetails />} />
+          <Route path="/podcast/:podcastId" element={<DetailsPagePodcast />} />
+          <Route path="/podcast/:podcastId/episode/:episodeId" element={<DetailsPageEpisodes />} />
         </Routes>
       </div>
     </>
