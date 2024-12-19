@@ -1,0 +1,17 @@
+.details-page-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin: 20px;
+  }
+  
+  .left-column {
+    flex: 1;
+    max-width: 30%;
+  }
+  
+  .right-column {
+    flex: 2;
+    max-width: 60%;
+  }
