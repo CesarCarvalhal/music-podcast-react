@@ -3,14 +3,16 @@ import { Link, useLocation } from 'react-router-dom';
 import './styles.css';
 
 export const Navbar: React.FC = () => {
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const location = useLocation();
 
   useEffect(() => {
-    setIsLoading(true);
+    setLoading(true);
+
     const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1000);
+      setLoading(false);
+    }, 1000); 
+
     return () => clearTimeout(timer);
   }, [location]);
 
@@ -20,11 +22,12 @@ export const Navbar: React.FC = () => {
         <Link className="custom-nav-bar-brand" to="/">Podcaster</Link>
       </nav>
       <hr className="custom-nav-bar-line" />
-      {isLoading && (
+      
+      {loading && (
         <div className="loading-indicator">
           <div className="spinner"></div>
         </div>
       )}
     </>
   );
-}
+};

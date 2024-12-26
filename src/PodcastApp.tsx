@@ -1,11 +1,10 @@
 import React from 'react';
-import { Navbar } from './ui/components/Navbar';
+import AppRouter from './router/AppRouter';
 
 const PodcastApp: React.FC = () => {
   return (
     <div className="app">
-      <Navbar />
-      {/* Aquí puedes agregar las rutas o el contenido principal */}
+      <AppRouter />
     </div>
   );
 };
