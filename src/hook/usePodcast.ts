@@ -6,7 +6,7 @@ const CACHE_TIMESTAMP_KEY_PODCAST = 'podcast_data_timestamp';
 
 const ALLORIGINS_URL = import.meta.env.VITE_ALLORIGINS_URL;
 
-export const usePodcastFetch = <T>(url: string): FetchState<T> => {
+export const usePodcast = <T>(url: string): FetchState<T> => {
   const [state, setState] = useState<FetchState<T>>({
     data: null,
     isLoading: true,

@@ -3,7 +3,7 @@ interface SearchPodcastProps {
   onSearchChange: (term: string) => void;
 }
 
-const SearchPodcasts: React.FC<SearchPodcastProps> = ({ searchTerm, onSearchChange }) => {
+export const SearchPodcasts: React.FC<SearchPodcastProps> = ({ searchTerm, onSearchChange }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     onSearchChange(event.target.value);
   };
@@ -21,4 +21,3 @@ const SearchPodcasts: React.FC<SearchPodcastProps> = ({ searchTerm, onSearchChan
   );
 };
 
-export default SearchPodcasts;

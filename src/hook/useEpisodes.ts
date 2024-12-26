@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Episode, UseFetchEpisodesResult } from '../types/podcast';
 
 
-const useFetchEpisodes = (podcastId: string): UseFetchEpisodesResult => {
+export const useEpisodes = (podcastId: string): UseFetchEpisodesResult => {
     const [episodes, setEpisodes] = useState<Episode[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [hasError, setHasError] = useState<boolean>(false);
@@ -46,5 +46,3 @@ const useFetchEpisodes = (podcastId: string): UseFetchEpisodesResult => {
 
     return { episodes, isLoading, hasError, error };
 };
-
-export default useFetchEpisodes;

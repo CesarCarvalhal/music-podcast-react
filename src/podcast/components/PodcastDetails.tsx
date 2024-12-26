@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import LoadingMessage from './LoadingMessage';
-import { usePodcastFetch } from '../../hook/usePodcastFetch';
+import { usePodcast } from '../../hook/usePodcast';
 import './styles.css';
 import { Podcast } from '../../types/podcast';
 
@@ -17,7 +17,7 @@ const PODCASTS_URL = import.meta.env.VITE_PODCAST_API_URL;
 export const PodcastDetails: React.FC = () => {
   const { podcastId } = useParams<{ podcastId: string }>();
 
-  const { data, isLoading, hasError, errorMessage } = usePodcastFetch<PodcastFetchResponse>(PODCASTS_URL);
+  const { data, isLoading, hasError, errorMessage } = usePodcast<PodcastFetchResponse>(PODCASTS_URL);
 
   const podcastData = data?.feed?.entry.find(
     (entry) => entry.id.attributes['im:id'] === podcastId

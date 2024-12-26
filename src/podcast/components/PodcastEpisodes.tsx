@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import './styles.css';
 import LoadingMessage from '../components/LoadingMessage';
-import useFetchEpisodes from '../../hook/useFetchEpisodes';
+import { useEpisodes } from '../../hook/useEpisodes';
 
 const formatDuration = (milliseconds: number) => {
     const totalSeconds = Math.floor(milliseconds / 1000);
@@ -16,7 +16,7 @@ const formatDuration = (milliseconds: number) => {
 export const PodcastEpisodes: React.FC = () => {
     const { podcastId } = useParams<{ podcastId: string }>();
 
-    const { episodes, isLoading, hasError, error } = useFetchEpisodes(podcastId || '');
+    const { episodes, isLoading, hasError, error } = useEpisodes(podcastId || '');
 
     if (isLoading) {
         return <LoadingMessage />;
@@ -54,8 +54,8 @@ export const PodcastEpisodes: React.FC = () => {
                                             {episode.trackName}
                                         </Link>
                                     </td>
-                                    <td>{new Date(episode.releaseDate).toLocaleDateString()}</td>
-                                    <td>{formatDuration(episode.trackTimeMillis)}</td>
+                                    <td>{episode.releaseDate ? new Date(episode.releaseDate).toLocaleDateString() : 'Fecha no disponible'}</td>
+                                    <td>{episode.trackTimeMillis ? formatDuration(episode.trackTimeMillis) : 'Duración no disponible'}</td>
                                 </tr>
                             ))}
                         </tbody>

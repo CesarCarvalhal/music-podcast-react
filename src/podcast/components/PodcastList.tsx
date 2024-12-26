@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { usePodcastFetch } from '../../hook/usePodcastFetch';
+import { usePodcast } from '../../hook/usePodcast';
 import LoadingMessage from './LoadingMessage';
 import { PodcastCard } from './PodcastCard';
-import SearchPodcasts from './SearchPodcasts';
 import { Podcast } from '../../types/podcast';
+import { SearchPodcasts } from './SearchPodcasts';
 
 
 
@@ -17,7 +17,7 @@ const PODCASTS_URL = import.meta.env.VITE_PODCAST_API_URL;
 
 export const PodcastList: React.FC = () => {
 
-  const { data, isLoading, hasError, errorMessage } = usePodcastFetch<PodcastFetchResponse>(PODCASTS_URL);
+  const { data, isLoading, hasError, errorMessage } = usePodcast<PodcastFetchResponse>(PODCASTS_URL);
 
   const podcasts = data?.feed?.entry || [];
   const [searchTerm, setSearchTerm] = useState<string>('');
