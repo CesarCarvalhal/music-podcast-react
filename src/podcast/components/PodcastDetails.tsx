@@ -3,19 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import LoadingMessage from './LoadingMessage';
 import { usePodcastFetch } from '../../hook/usePodcastFetch';
 import './styles.css';
+import { Podcast } from '../../types/podcast';
 
-interface Podcast {
-  id: {
-    attributes: {
-      'im:id': string;
-    };
-  };
-  'im:image': { label: string }[];
-  'im:name': { label: string };
-  'im:artist': { label: string };
-  title: { label: string };
-  summary: { label: string };
-}
 
 interface PodcastFetchResponse {
   feed: {

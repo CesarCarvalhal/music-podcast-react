@@ -1,16 +1,10 @@
 import { useState, useEffect, useCallback } from 'react';
+import { FetchState } from '../types/podcast';
 
 const CACHE_KEY_PODCAST = 'podcast_data';
 const CACHE_TIMESTAMP_KEY_PODCAST = 'podcast_data_timestamp';
 
 const ALLORIGINS_URL = import.meta.env.VITE_ALLORIGINS_URL;
-
-interface FetchState<T> {
-  data: T | null;
-  isLoading: boolean;
-  hasError: boolean;
-  errorMessage: string;
-}
 
 export const usePodcastFetch = <T>(url: string): FetchState<T> => {
   const [state, setState] = useState<FetchState<T>>({

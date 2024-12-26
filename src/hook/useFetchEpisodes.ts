@@ -1,18 +1,6 @@
 import { useState, useEffect } from 'react';
+import { Episode, UseFetchEpisodesResult } from '../types/podcast';
 
-interface Episode {
-    trackId: number;
-    trackName: string;
-    releaseDate: string;
-    trackTimeMillis: number;
-}
-
-interface UseFetchEpisodesResult {
-    episodes: Episode[];
-    isLoading: boolean;
-    hasError: boolean;
-    error: string | null;
-}
 
 const useFetchEpisodes = (podcastId: string): UseFetchEpisodesResult => {
     const [episodes, setEpisodes] = useState<Episode[]>([]);

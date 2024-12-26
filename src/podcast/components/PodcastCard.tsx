@@ -1,20 +1,6 @@
 import { Link } from 'react-router-dom';
 import './styles.css';
-
-interface Podcast {
-  id: {
-    attributes: {
-      'im:id': string;
-    };
-  };
-  'im:image': { label: string }[];
-  'im:name': {
-    label: string;
-  };
-  'im:artist': {
-    label: string;
-  };
-}
+import { Podcast } from '../../types/podcast';
 
 interface PodcastCardProps {
   podcast: Podcast;

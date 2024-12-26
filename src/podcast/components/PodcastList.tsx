@@ -3,19 +3,8 @@ import { usePodcastFetch } from '../../hook/usePodcastFetch';
 import LoadingMessage from './LoadingMessage';
 import { PodcastCard } from './PodcastCard';
 import SearchPodcasts from './SearchPodcasts';
+import { Podcast } from '../../types/podcast';
 
-
-interface Podcast {
-  id: {
-    attributes: {
-      'im:id': string;
-    };
-  };
-  'im:image': { label: string }[];
-  'im:name': { label: string };
-  'im:artist': { label: string };
-  title: { label: string };
-}
 
 
 interface PodcastFetchResponse {

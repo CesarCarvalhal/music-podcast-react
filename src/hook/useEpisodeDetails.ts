@@ -1,11 +1,6 @@
 import { useState, useEffect } from 'react';
+import { Episode } from '../types/podcast';
 
-interface Episode {
-  trackId: number;
-  trackName: string;
-  description: string;
-  previewUrl: string;
-}
 
 export const useEpisodeDetails = (podcastId: string | undefined, episodeId: string | undefined) => {
     const [episodeDetails, setEpisodeDetails] = useState<Episode | null>(null);
