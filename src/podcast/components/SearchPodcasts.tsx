@@ -1,7 +1,6 @@
-interface SearchPodcastProps {
-  searchTerm: string;
-  onSearchChange: (term: string) => void;
-}
+import { SearchPodcastProps } from '../../types/podcast';
+import './styles.css';
+
 
 export const SearchPodcasts: React.FC<SearchPodcastProps> = ({ searchTerm, onSearchChange }) => {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {

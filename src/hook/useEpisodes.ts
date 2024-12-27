@@ -1,48 +1,43 @@
-import { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { Episode, UseFetchEpisodesResult } from '../types/podcast';
 
-
 export const useEpisodes = (podcastId: string): UseFetchEpisodesResult => {
-    const [episodes, setEpisodes] = useState<Episode[]>([]);
-    const [isLoading, setIsLoading] = useState<boolean>(true);
-    const [hasError, setHasError] = useState<boolean>(false);
-    const [error, setError] = useState<string | null>(null);
+  const { data, isLoading, isError, error } = useQuery<Episode[], Error>({
+    queryKey: ['episodes', podcastId],
+    queryFn: async () => {
+      if (!podcastId) {
+        throw new Error('No se proporcionó el ID del podcast');
+      }
 
-    useEffect(() => {
-        if (!podcastId) return;
+      const episodesUrl = `${import.meta.env.VITE_PODCAST_EPISODES_URL}${podcastId}&media=podcast&entity=podcastEpisode`;
+      const allOriginsUrl = `${import.meta.env.VITE_ALLORIGINS_URL}${encodeURIComponent(episodesUrl)}`;
 
-        const fetchEpisodes = async () => {
-            try {
-                const episodesUrl = `${import.meta.env.VITE_PODCAST_EPISODES_URL}${podcastId}&media=podcast&entity=podcastEpisode`;
+      const response = await fetch(allOriginsUrl);
 
-                const allOriginsUrl = `${import.meta.env.VITE_ALLORIGINS_URL}${encodeURIComponent(episodesUrl)}`;
+      if (!response.ok) {
+        throw new Error('Error al obtener los episodios del podcast');
+      }
 
-                const response = await fetch(allOriginsUrl);
+      const data = await response.json();
 
-                const data = await response.json();
+      if (data.contents) {
+        const parsedData = JSON.parse(data.contents);
+        if (parsedData.results) {
+          return parsedData.results;
+        } else {
+          throw new Error('No se encontraron episodios');
+        }
+      } else {
+        throw new Error('No se encontraron episodios');
+      }
+    },
+    enabled: !!podcastId,
+  });
 
-                if (data.contents) {
-                    const parsedData = JSON.parse(data.contents);
-                    if (parsedData.results) {
-                        setEpisodes(parsedData.results);
-                    } else {
-                        setHasError(true);
-                        setError('No episodes found');
-                    }
-                } else {
-                    setHasError(true);
-                    setError('No episodes found');
-                }
-            } catch (err) {
-                setHasError(true);
-                setError((err as Error).message);
-            } finally {
-                setIsLoading(false);
-            }
-        };
-
-        fetchEpisodes();
-    }, [podcastId]);
-
-    return { episodes, isLoading, hasError, error };
+  return {
+    episodes: data || [],
+    isLoading,
+    hasError: isError,
+    error: error?.message || '',
+  };
 };

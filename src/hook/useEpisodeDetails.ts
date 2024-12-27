@@ -1,50 +1,48 @@
-import { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { Episode } from '../types/podcast';
 
-
 export const useEpisodeDetails = (podcastId: string | undefined, episodeId: string | undefined) => {
-    const [episodeDetails, setEpisodeDetails] = useState<Episode | null>(null);
-    const [error, setError] = useState<string | null>(null);
-  
-    useEffect(() => {
+  const { data, isLoading, isError, error } = useQuery<Episode | null, Error>({
+    queryKey: ['episodeDetails', podcastId, episodeId],
+    queryFn: async () => {
       if (!podcastId || !episodeId) {
-        setError('Faltan parámetros de ID de podcast o episodio');
-        return;
+        throw new Error('Faltan parámetros de ID de podcast o episodio');
       }
-  
-      const fetchEpisodeDetails = async () => {
-        try {
-          const episodesUrl = `${import.meta.env.VITE_PODCAST_EPISODES_URL}${podcastId}&media=podcast&entity=podcastEpisode`;
-          const allOriginsUrl = `${import.meta.env.VITE_ALLORIGINS_URL}${encodeURIComponent(episodesUrl)}`;
-  
-          const response = await fetch(allOriginsUrl);
-          const data = await response.json();
-          const jsonData = JSON.parse(data.contents);
-  
-          if (jsonData && jsonData.results) {
-            const episodeData = jsonData.results.find((episode: Episode) => episode.trackId === Number(episodeId));
-            if (episodeData) {
-              setEpisodeDetails({
-                trackId: episodeData.trackId,
-                trackName: episodeData.trackName,
-                description: episodeData.description,
-                previewUrl: episodeData.previewUrl,
-              });
-            } else {
-              setError('Episodio no encontrado');
-            }
-          } else {
-            setError('No se encontraron resultados en la respuesta');
-          }
-        } catch (err) {
-          console.error('Error fetching episode details:', err);
-          setError('Error al cargar los detalles del episodio.');
+
+      const episodesUrl = `${import.meta.env.VITE_PODCAST_EPISODES_URL}${podcastId}&media=podcast&entity=podcastEpisode`;
+      const allOriginsUrl = `${import.meta.env.VITE_ALLORIGINS_URL}${encodeURIComponent(episodesUrl)}`;
+
+      const response = await fetch(allOriginsUrl);
+      if (!response.ok) {
+        throw new Error('Error al obtener los detalles del episodio');
+      }
+
+      const data = await response.json();
+      const jsonData = JSON.parse(data.contents);
+
+      if (jsonData && jsonData.results) {
+        const episodeData = jsonData.results.find((episode: Episode) => episode.trackId === Number(episodeId));
+        if (episodeData) {
+          return {
+            trackId: episodeData.trackId,
+            trackName: episodeData.trackName,
+            description: episodeData.description,
+            previewUrl: episodeData.previewUrl,
+          };
+        } else {
+          throw new Error('Episodio no encontrado');
         }
-      };
-  
-      fetchEpisodeDetails();
-    }, [podcastId, episodeId]);
-  
-    return { episodeDetails, error };
+      } else {
+        throw new Error('No se encontraron resultados en la respuesta');
+      }
+    },
+    enabled: !!podcastId && !!episodeId,
+  });
+
+  return {
+    episodeDetails: data,
+    isLoading,
+    hasError: isError,
+    errorMessage: error?.message || '',
   };
-  
+};

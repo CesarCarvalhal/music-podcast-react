@@ -7,14 +7,14 @@ import { useEpisodeDetails } from '../../hook/useEpisodeDetails';
 export const EpisodesDetail: React.FC = () => {
   const { podcastId, episodeId } = useParams<{ podcastId: string; episodeId: string }>();
 
-  const { episodeDetails, error } = useEpisodeDetails(podcastId, episodeId);
+  const { episodeDetails, errorMessage } = useEpisodeDetails(podcastId, episodeId);
   if (!podcastId || !episodeId) {
     return <div>Error: Faltan parámetros de ID de podcast o episodio.</div>;
   }
 
 
-  if (error) {
-    return <div>{error}</div>;
+  if (errorMessage) {
+    return <div>{errorMessage}</div>;
   }
 
   if (!episodeDetails) {

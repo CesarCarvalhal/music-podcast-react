@@ -27,15 +27,13 @@ export interface UseFetchEpisodesResult {
   error: string | null;
 }
 
-export interface FetchState<T> {
-  data: T | null;
-  isLoading: boolean;
-  hasError: boolean;
-  errorMessage: string;
-}
-
 export interface PodcastFetchResponse {
   feed: {
     entry: Podcast[];
   };
+}
+
+export interface SearchPodcastProps {
+  searchTerm: string;
+  onSearchChange: (term: string) => void;
 }

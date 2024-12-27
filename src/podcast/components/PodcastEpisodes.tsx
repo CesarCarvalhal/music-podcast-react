@@ -1,8 +1,8 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
-import './styles.css';
 import LoadingMessage from '../components/LoadingMessage';
 import { useEpisodes } from '../../hook/useEpisodes';
+import './styles.css';
 
 const formatDuration = (milliseconds: number) => {
     const totalSeconds = Math.floor(milliseconds / 1000);
