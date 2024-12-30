@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import './styles.css';
+import './styles.scss';
 
 export const Navbar: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(false);

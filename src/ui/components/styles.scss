@@ -1,0 +1,48 @@
+$primary-color: #007bff;
+$hover-color: #0056b3;
+$secondary-color: #3498db;
+$border-color: rgb(194, 194, 194);
+$spinner-size: 40px;
+$spinner-border-width: 4px;
+
+.custom-nav-bar {
+    padding: 10px;
+
+    .custom-nav-bar-brand {
+        font-size: 24px;
+        color: $primary-color;
+        font-weight: bold;
+        text-decoration: none;
+
+        &:hover {
+            color: $hover-color;
+        }
+    }
+}
+
+.custom-nav-bar-line {
+    border: none;
+    border-top: 1px solid $border-color;
+}
+
+.loading-indicator {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    width: $spinner-size;
+    height: $spinner-size;
+    border: $spinner-border-width solid transparent;
+    border-top: $spinner-border-width solid $secondary-color;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

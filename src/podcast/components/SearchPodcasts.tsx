@@ -1,5 +1,5 @@
 import { SearchPodcastProps } from '../../types/podcast';
-import './styles.css';
+import './styles.scss';
 
 
 export const SearchPodcasts: React.FC<SearchPodcastProps> = ({ searchTerm, onSearchChange }) => {

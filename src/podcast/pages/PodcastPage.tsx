@@ -1,6 +1,6 @@
 import React from 'react';
 import { PodcastList } from '../components/PodcastList';
-import './styles.css'; 
+import './styles.scss'; 
 
 const PodcastDetailPage: React.FC = () => {
   return (

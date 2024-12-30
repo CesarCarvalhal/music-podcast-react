@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Podcast } from '../../types/podcast';
-import './styles.css';
+import './styles.scss';
 
 interface PodcastCardProps {
   podcast: Podcast;

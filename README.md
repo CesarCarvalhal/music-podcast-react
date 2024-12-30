@@ -65,5 +65,3 @@ Para servir estos archivos, usa un servidor estático como [serve][serve] con el
 yarn global add serve
 serve -s dist
 ```
-
-Para ver la aplicación en modo  _production_, simplemente accede a la siguiente URL: http://localhost:5000.

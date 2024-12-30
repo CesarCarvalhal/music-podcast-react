@@ -3,7 +3,7 @@ import { Link, useParams } from 'react-router-dom';
 import LoadingMessage from './LoadingMessage';
 import { usePodcast } from '../../hook/usePodcast';
 import { Podcast, PodcastFetchResponse } from '../../types/podcast';
-import './styles.css';
+import './styles.scss';
 
 const PODCASTS_URL = import.meta.env.VITE_PODCAST_API_URL;
 
@@ -39,7 +39,7 @@ export const PodcastDetails: React.FC = () => {
             />
           </Link>
         </div>
-        <hr className="podcast-details-hr" />
+        <hr />
 
         <Link to={`/podcast/${podcastData.id.attributes['im:id']}`} className="podcast-link">
           <p>

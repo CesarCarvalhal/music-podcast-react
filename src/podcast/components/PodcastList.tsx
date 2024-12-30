@@ -4,7 +4,7 @@ import LoadingMessage from './LoadingMessage';
 import { PodcastCard } from './PodcastCard';
 import { Podcast } from '../../types/podcast';
 import { SearchPodcasts } from './SearchPodcasts';
-import './styles.css';
+import './styles.scss';
 
 
 

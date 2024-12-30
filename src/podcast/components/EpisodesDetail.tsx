@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import './styles.css';
+import './styles.scss';
 import LoadingMessage from '../components/LoadingMessage';
 import { useEpisodeDetails } from '../../hook/useEpisodeDetails';
 
