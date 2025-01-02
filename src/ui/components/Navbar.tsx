@@ -1,33 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useIsFetching } from '@tanstack/react-query';
 import './styles.scss';
 
 export const Navbar: React.FC = () => {
-  const [loading, setLoading] = useState<boolean>(false);
-  const location = useLocation();
-
-  useEffect(() => {
-    setLoading(true);
-
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 1000); 
-
-    return () => clearTimeout(timer);
-  }, [location]);
+  const isFetching = useIsFetching();
 
   return (
     <>
       <nav className="custom-nav-bar">
         <Link className="custom-nav-bar-brand" to="/">Podcaster</Link>
+
+        {isFetching > 0 && (
+          <div className="loading-indicator">
+            <div className="spinner"></div>
+          </div>
+        )}
       </nav>
-      <hr className="custom-nav-bar-line" />
       
-      {loading && (
-        <div className="loading-indicator">
-          <div className="spinner"></div>
-        </div>
-      )}
+      <hr className="custom-nav-bar-line" />
     </>
   );
 };

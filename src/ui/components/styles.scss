@@ -2,10 +2,13 @@ $primary-color: #007bff;
 $hover-color: #0056b3;
 $secondary-color: #3498db;
 $border-color: rgb(194, 194, 194);
-$spinner-size: 40px;
+$spinner-size: 20px;
 $spinner-border-width: 4px;
 
 .custom-nav-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 10px;
 
     .custom-nav-bar-brand {
@@ -18,23 +21,21 @@ $spinner-border-width: 4px;
             color: $hover-color;
         }
     }
+
+    .loading-indicator {
+        position: relative;
+        width: $spinner-size;
+        height: $spinner-size;
+        border: $spinner-border-width solid transparent;
+        border-top: $spinner-border-width solid $secondary-color;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+    }
 }
 
 .custom-nav-bar-line {
     border: none;
     border-top: 1px solid $border-color;
-}
-
-.loading-indicator {
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    width: $spinner-size;
-    height: $spinner-size;
-    border: $spinner-border-width solid transparent;
-    border-top: $spinner-border-width solid $secondary-color;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
 }
 
 @keyframes spin {

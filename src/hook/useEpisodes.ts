@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { Episode, UseFetchEpisodesResult } from '../types/podcast';
+import { Episode } from '../types/podcast';
 
-export const useEpisodes = (podcastId: string): UseFetchEpisodesResult => {
+export const useEpisodes = (podcastId: string) => {
   const { data, isLoading, isError, error } = useQuery<Episode[], Error>({
     queryKey: ['episodes', podcastId],
     queryFn: async () => {
