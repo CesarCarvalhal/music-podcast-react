@@ -12,12 +12,11 @@ export const Navbar: React.FC = () => {
         <Link className="custom-nav-bar-brand" to="/">Podcaster</Link>
 
         {isFetching > 0 && (
-          <div className="loading-indicator">
+          <div className="loading-indicator" data-testid="spinner">
             <div className="spinner"></div>
           </div>
         )}
       </nav>
-      
       <hr className="custom-nav-bar-line" />
     </>
   );
