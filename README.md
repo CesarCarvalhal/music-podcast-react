@@ -65,3 +65,19 @@ Para servir estos archivos, usa un servidor estático como [serve][serve] con el
 yarn global add serve
 serve -s dist
 ```
+
+### Modo tests
+
+Para ejecutar las pruebas unitarias de la aplicación, utiliza el siguiente comando:
+
+```
+yarn test
+```
+
+Este comando ejecutará las pruebas de los componentes y funcionalidades de la aplicación.
+
+Además, puedes ejecutar las pruebas en modo "watch" para que se ejecuten automáticamente cuando realices cambios en los archivos:
+
+```
+yarn test:watch
+```
