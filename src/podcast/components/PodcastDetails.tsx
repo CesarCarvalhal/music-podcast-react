@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import LoadingMessage from './LoadingMessage';
-import { usePodcast } from '../../hook/usePodcast';
+import { usePodcast } from '../../hooks/usePodcast';
 import { Podcast, PodcastFetchResponse } from '../../types/podcast';
 import './styles.scss';
 

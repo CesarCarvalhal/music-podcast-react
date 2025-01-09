@@ -2,7 +2,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import './styles.scss';
 import LoadingMessage from '../components/LoadingMessage';
-import { useEpisodeDetails } from '../../hook/useEpisodeDetails';
+import { useEpisodeDetails } from '../../hooks/useEpisodeDetails';
 
 export const EpisodesDetail: React.FC = () => {
   const { podcastId, episodeId } = useParams<{ podcastId: string; episodeId: string }>();

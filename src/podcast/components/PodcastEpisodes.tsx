@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import LoadingMessage from '../components/LoadingMessage';
-import { useEpisodes } from '../../hook/useEpisodes';
+import { useEpisodes } from '../../hooks/useEpisodes';
 import './styles.scss';
 
 const formatDuration = (milliseconds: number) => {

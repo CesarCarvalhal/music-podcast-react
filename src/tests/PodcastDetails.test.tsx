@@ -1,10 +1,10 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { PodcastDetails } from '../../podcast/components/PodcastDetails';
-import { usePodcast } from '../../hook/usePodcast';
+import { PodcastDetails } from '../podcast/components/PodcastDetails';
+import { usePodcast } from '../hooks/usePodcast';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import '@testing-library/jest-dom';
 
-jest.mock('../../hook/usePodcast', () => ({
+jest.mock('../hooks/usePodcast', () => ({
     usePodcast: jest.fn(),
 }));
 

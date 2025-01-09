@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { Podcast } from '../../types/podcast';
-import { PodcastCard } from '../../podcast/components/PodcastCard';
+import { Podcast } from '../types/podcast';
+import { PodcastCard } from '../podcast/components/PodcastCard';
 import '@testing-library/jest-dom';
 
 

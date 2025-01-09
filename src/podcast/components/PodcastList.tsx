@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { usePodcast } from '../../hook/usePodcast';
+import { usePodcast } from '../../hooks/usePodcast';
 import LoadingMessage from './LoadingMessage';
 import { PodcastCard } from './PodcastCard';
 import { Podcast } from '../../types/podcast';
@@ -38,12 +38,14 @@ export const PodcastList: React.FC = () => {
 
       {isLoading && <LoadingMessage />}
 
-      <div className="search-container">
-        <div className="podcast-count">
-          {filteredPodcasts.length}
+      {!isLoading && (
+        <div className="search-container">
+          <div className="podcast-count">
+            {filteredPodcasts.length}
+          </div>
+          <SearchPodcasts searchTerm={searchTerm} onSearchChange={handleSearchChange} />
         </div>
-        <SearchPodcasts searchTerm={searchTerm} onSearchChange={handleSearchChange} />
-      </div>
+      )}
 
       {filteredPodcasts.length > 0 ? (
         <ul className="podcast-list">
@@ -54,7 +56,7 @@ export const PodcastList: React.FC = () => {
           ))}
         </ul>
       ) : (
-        !isLoading && <div className='messageSearchPodcast'>No se encontraron podcasts.</div>
+        !isLoading && <div className='messageSearchPodcast'>No se encontraron podcasts</div>
       )}
     </div>
   );
