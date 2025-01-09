@@ -5,7 +5,7 @@ import { usePodcast } from '../../hook/usePodcast';
 import { Podcast, PodcastFetchResponse } from '../../types/podcast';
 import './styles.scss';
 
-const PODCASTS_URL = import.meta.env.VITE_PODCAST_API_URL;
+const PODCASTS_URL = process.env.VITE_PODCAST_API_URL || '';
 
 export const PodcastDetails: React.FC = () => {
   const { podcastId } = useParams<{ podcastId: string }>();
