@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 const CACHE_KEY_PODCAST = 'podcast_data';
 const CACHE_TIMESTAMP_KEY_PODCAST = 'podcast_data_timestamp';
-const ALLORIGINS_URL = import.meta.env.VITE_ALLORIGINS_URL;
+const ALLORIGINS_URL = process.env.VITE_ALLORIGINS_URL;
 
 export const usePodcast = <T,>(url: string) => {
   const { data, isLoading, isError, error } = useQuery<T, Error>({

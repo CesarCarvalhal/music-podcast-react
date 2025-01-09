@@ -6,15 +6,13 @@ import { Podcast } from '../../types/podcast';
 import { SearchPodcasts } from './SearchPodcasts';
 import './styles.scss';
 
-
-
 interface PodcastFetchResponse {
   feed: {
     entry: Podcast[];
   };
 }
 
-const PODCASTS_URL = import.meta.env.VITE_PODCAST_API_URL;
+const PODCASTS_URL = process.env.VITE_PODCAST_API_URL || '';
 
 export const PodcastList: React.FC = () => {
 
@@ -56,7 +54,7 @@ export const PodcastList: React.FC = () => {
           ))}
         </ul>
       ) : (
-        !isLoading && <div>No se encontraron podcasts.</div>
+        !isLoading && <div className='messageSearchPodcast'>No se encontraron podcasts.</div>
       )}
     </div>
   );

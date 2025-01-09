@@ -1,6 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { Episode } from '../types/podcast';
 
+const PODCAST_EPISODES_URL = process.env.VITE_PODCAST_EPISODES_URL || '';
+const ALL_ORIGINS_URL = process.env.VITE_ALLORIGINS_URL || '';
+
 export const useEpisodeDetails = (podcastId: string | undefined, episodeId: string | undefined) => {
   const { data, isLoading, isError, error } = useQuery<Episode | null, Error>({
     queryKey: ['episodeDetails', podcastId, episodeId],
@@ -9,8 +12,8 @@ export const useEpisodeDetails = (podcastId: string | undefined, episodeId: stri
         throw new Error('Faltan parámetros de ID de podcast o episodio');
       }
 
-      const episodesUrl = `${import.meta.env.VITE_PODCAST_EPISODES_URL}${podcastId}&media=podcast&entity=podcastEpisode`;
-      const allOriginsUrl = `${import.meta.env.VITE_ALLORIGINS_URL}${encodeURIComponent(episodesUrl)}`;
+      const episodesUrl = `${PODCAST_EPISODES_URL}${podcastId}&media=podcast&entity=podcastEpisode`;
+      const allOriginsUrl = `${ALL_ORIGINS_URL}${encodeURIComponent(episodesUrl)}`;
 
       const response = await fetch(allOriginsUrl);
       if (!response.ok) {

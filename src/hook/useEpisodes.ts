@@ -1,6 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { Episode } from '../types/podcast';
 
+const PODCAST_EPISODES_URL = process.env.VITE_PODCAST_EPISODES_URL || '';
+const ALL_ORIGINS_URL = process.env.VITE_ALLORIGINS_URL || '';
+
 export const useEpisodes = (podcastId: string) => {
   const { data, isLoading, isError, error } = useQuery<Episode[], Error>({
     queryKey: ['episodes', podcastId],
@@ -9,8 +12,8 @@ export const useEpisodes = (podcastId: string) => {
         throw new Error('No se proporcionó el ID del podcast');
       }
 
-      const episodesUrl = `${import.meta.env.VITE_PODCAST_EPISODES_URL}${podcastId}&media=podcast&entity=podcastEpisode`;
-      const allOriginsUrl = `${import.meta.env.VITE_ALLORIGINS_URL}${encodeURIComponent(episodesUrl)}`;
+      const episodesUrl = `${PODCAST_EPISODES_URL}${podcastId}&media=podcast&entity=podcastEpisode`;
+      const allOriginsUrl = `${ALL_ORIGINS_URL}${encodeURIComponent(episodesUrl)}`;
 
       const response = await fetch(allOriginsUrl);
 
