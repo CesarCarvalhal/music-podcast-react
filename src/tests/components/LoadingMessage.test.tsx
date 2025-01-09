@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import LoadingMessage from '../podcast/components/LoadingMessage';
+import LoadingMessage from '../../podcast/components/LoadingMessage';
 
 describe('LoadingMessage', () => {
   it('debería mostrar el mensaje de carga', () => {

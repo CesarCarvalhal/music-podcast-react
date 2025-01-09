@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { SearchPodcasts } from '../podcast/components/SearchPodcasts';
+import { SearchPodcasts } from '../../podcast/components/SearchPodcasts';
 
 describe('SearchPodcasts', () => {
   it('debería renderizar correctamente el input con el valor inicial', () => {
