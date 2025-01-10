@@ -1,10 +1,10 @@
-import { Route, Routes } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import { Navbar } from '../../ui/components/Navbar';
+import PodcastPage from '../pages/PodcastPage';
 import { DetailsPagePodcast } from '../pages/DetailsPagePodcast';
 import { DetailsPageEpisodes } from '../pages/DetailsPageEpisodes';
-import { PodcastPage } from '../pages/PodcastPage';
 
-export const PodcastRoutes = () => {
+const PodcastRoutes: React.FC = () => {
   return (
     <>
       <Navbar />
@@ -18,3 +18,5 @@ export const PodcastRoutes = () => {
     </>
   );
 };
+
+export default PodcastRoutes;

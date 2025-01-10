@@ -1,7 +1,12 @@
 import { Link } from 'react-router-dom';
-import './styles.css';
+import { Podcast } from '../../types/podcast';
+import './styles.scss';
 
-export const PodcastCard = ({ podcast }) => {
+interface PodcastCardProps {
+  podcast: Podcast;
+}
+
+export const PodcastCard: React.FC<PodcastCardProps> = ({ podcast }) => {
   return (
     <Link
       to={`/podcast/${podcast.id.attributes['im:id']}`}

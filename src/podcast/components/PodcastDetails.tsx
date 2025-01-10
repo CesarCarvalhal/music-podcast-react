@@ -1,22 +1,27 @@
 import React from 'react';
 import { Link, useParams } from 'react-router-dom';
 import LoadingMessage from './LoadingMessage';
-import { usePodcastFetch } from '../../hook/usePodcastFetch ';
-import './styles.css';
+import { usePodcast } from '../../hooks/usePodcast';
+import { Podcast, PodcastFetchResponse } from '../../types/podcast';
+import './styles.scss';
 
-export const PodcastDetails = () => {
-  const { podcastId } = useParams();
+const PODCASTS_URL = process.env.VITE_PODCAST_API_URL || '';
 
-  const { data, isLoading, hasError, error } = usePodcastFetch('https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json');
+export const PodcastDetails: React.FC = () => {
+  const { podcastId } = useParams<{ podcastId: string }>();
 
-  const podcastData = data?.feed?.entry.find((entry) => entry.id.attributes['im:id'] === podcastId);
+  const { data, isLoading, hasError, errorMessage } = usePodcast<PodcastFetchResponse>(PODCASTS_URL);
+
+  const podcastData = data?.feed?.entry.find(
+    (entry: Podcast) => entry.id.attributes['im:id'] === podcastId
+  );
 
   if (isLoading) {
     return <LoadingMessage />;
   }
 
   if (hasError) {
-    return <div>{error.message}</div>;
+    return <div className="error-message">Error: {errorMessage}</div>;
   }
 
   if (!podcastData) {
@@ -34,7 +39,7 @@ export const PodcastDetails = () => {
             />
           </Link>
         </div>
-        <hr className="podcast-details-hr" />
+        <hr />
 
         <Link to={`/podcast/${podcastData.id.attributes['im:id']}`} className="podcast-link">
           <p>
@@ -45,7 +50,7 @@ export const PodcastDetails = () => {
         <hr className="podcast-details-hr" />
 
         <p><strong>Description:</strong></p>
-        <p>{podcastData['summary'].label}</p>
+        <p>{podcastData.summary.label}</p>
       </div>
     </div>
   );

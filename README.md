@@ -10,7 +10,6 @@
 - **Episodios**: Muestra una lista de episodios de un podcast seleccionado.
 - **Detalles del Episodio**: Muestra la descripción y un componente de audio para escuchar el episodio.
 
-
 ## Instalación
 
 1. Clona el repositorio:
@@ -29,6 +28,14 @@
 
     ```bash
     yarn install
+    ```
+
+4. Crea un archivo `.env` en la raíz del proyecto con las siguientes variables de entorno:
+
+    ```env
+    VITE_PODCAST_API_URL=https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json
+    VITE_PODCAST_EPISODES_URL=https://itunes.apple.com/lookup?id=
+    VITE_ALLORIGINS_URL=https://api.allorigins.win/get?url=
     ```
 
 ## Comandos
@@ -59,4 +66,18 @@ yarn global add serve
 serve -s dist
 ```
 
-Para ver la aplicación en modo  _production_, simplemente accede a la siguiente URL: http://localhost:5000.
+### Modo tests
+
+Para ejecutar las pruebas unitarias de la aplicación, utiliza el siguiente comando:
+
+```
+yarn test
+```
+
+Este comando ejecutará las pruebas de los componentes y funcionalidades de la aplicación.
+
+Además, puedes ejecutar las pruebas en modo "watch" para que se ejecuten automáticamente cuando realices cambios en los archivos:
+
+```
+yarn test:watch
+```
