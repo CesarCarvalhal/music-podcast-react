@@ -15,7 +15,7 @@ describe('PodcastEpisodes', () => {
                 trackId: '1',
                 trackName: 'Episode 1',
                 releaseDate: '2023-01-01T12:00:00Z',
-                trackTimeMillis: 3600000
+                trackTimeMillis: 3600000,
             },
             {
                 trackId: '2',
@@ -46,14 +46,16 @@ describe('PodcastEpisodes', () => {
 
         mockEpisodes.forEach((episode) => {
             expect(screen.getByText(episode.trackName)).toBeInTheDocument();
-            expect(screen.getByText(new Date(episode.releaseDate).toLocaleDateString())).toBeInTheDocument();
+            
+            const formattedDate = `${new Date(episode.releaseDate).getDate().toString().padStart(2, '0')}/${(new Date(episode.releaseDate).getMonth() + 1).toString().padStart(2, '0')}/${new Date(episode.releaseDate).getFullYear()}`;
+            expect(screen.getByText(formattedDate)).toBeInTheDocument();
 
             const durations = screen.getAllByText(/(\d{1,2}):(\d{2}):(\d{2})/);
 
             expect(durations).toHaveLength(mockEpisodes.length);
 
-            expect(durations[0].textContent).toMatch(/1:00:00$/);
-            expect(durations[1].textContent).toMatch(/2:00:00$/);
+            expect(durations[0].textContent).toMatch(/01:00:00$/);
+            expect(durations[1].textContent).toMatch(/02:00:00$/);
         });
     });
 

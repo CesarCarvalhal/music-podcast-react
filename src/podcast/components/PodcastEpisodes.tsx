@@ -17,6 +17,15 @@ const formatDuration = (milliseconds: number) => {
     }
 };
 
+const formatDate = (date: string) => {
+    const newDate = new Date(date);
+    const day = newDate.getDate().toString().padStart(2, '0');
+    const month = (newDate.getMonth() + 1).toString().padStart(2, '0');
+    const year = newDate.getFullYear();
+
+    return `${day}/${month}/${year}`;
+};
+
 export const PodcastEpisodes: React.FC = () => {
     const { podcastId } = useParams<{ podcastId: string }>();
 
@@ -58,7 +67,7 @@ export const PodcastEpisodes: React.FC = () => {
                                             {episode.trackName}
                                         </Link>
                                     </td>
-                                    <td>{episode.releaseDate ? new Date(episode.releaseDate).toLocaleDateString() : 'Fecha no disponible'}</td>
+                                    <td>{episode.releaseDate ? formatDate(episode.releaseDate) : 'Fecha no disponible'}</td>
                                     <td className="duration">{episode.trackTimeMillis ? formatDuration(episode.trackTimeMillis) : 'Duración no disponible'}</td>
                                 </tr>
                             ))}
