@@ -38,7 +38,7 @@
     VITE_ALLORIGINS_URL=https://api.allorigins.win/get?url=
     ```
 
-## Comandos
+## Comandos de ejecución
 
 ### Modo desarrollo
 
@@ -51,7 +51,7 @@ yarn dev
 
 ### Modo producción
 
-Para ejecutar la aplicación en modo desarrollo:
+Para ejecutar la aplicación en modo producción:
 
 ```
 yarn build
@@ -66,7 +66,7 @@ yarn global add serve
 serve -s dist
 ```
 
-### Modo tests
+### Pruebas
 
 Para ejecutar las pruebas unitarias de la aplicación, utiliza el siguiente comando:
 
